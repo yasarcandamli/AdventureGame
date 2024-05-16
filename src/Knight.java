@@ -1,5 +1,6 @@
 public class Knight extends GameCharacter {
+
     public Knight() {
-        super("Şovalye", 8, 24, 5);
+        super(3, "Şovalye", 8, 24, 5);
     }
 }
