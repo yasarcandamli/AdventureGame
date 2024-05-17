@@ -19,7 +19,7 @@ public class Player {
         Knight knight = new Knight();
 
         GameCharacter[] characterList = {new Samurai(), new Archer(), new Knight()};
-        System.out.println("--------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("Karakterler");
 
         for (GameCharacter gameCharacter : characterList) {
@@ -30,7 +30,7 @@ public class Player {
                     "\t\tPara: " + gameCharacter.getMoney());
         }
 
-        System.out.println("--------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.print("Lütfen seçmek istediğiniz karakterin ID numarasını giriniz: ");
         int selectCharacter = input.nextInt();
 
