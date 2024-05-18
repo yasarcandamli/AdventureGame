@@ -1,5 +1,4 @@
 public class SafeHouse extends NormalLocation {
-
     public SafeHouse(Player player) {
         super(player, "Güvenli Ev");
     }

@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Player {
-
     private int damage;
     private int health;
     private int money;
@@ -63,11 +62,13 @@ public class Player {
     }
 
     public void printInfo() {
-        System.out.println("Karakteriniz: " + this.getCharacterName() +
-                "\t\tSilahınız: " + this.getInventory().getWeapon().getWeaponName() +
-                "\t\tHasarınız: " + this.getDamage() +
-                "\t\tSağlığınız: " + this.getHealth() +
-                "\t\tParanız: " + this.getMoney());
+        System.out.println("Karakter: " + this.getCharacterName() +
+                "\t\tSilah: " + this.getInventory().getWeapon().getWeaponName() +
+                "\t\tHasar: " + this.getDamage() +
+                "\t\tZırh: " + this.getInventory().getArmor().getArmorName() +
+                "\t\tBlok: " + this.getInventory().getArmor().getArmorBlock() +
+                "\t\tSağlık: " + this.getHealth() +
+                "\t\tPara: " + this.getMoney());
     }
 
     public int getDamage() {

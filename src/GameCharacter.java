@@ -1,5 +1,4 @@
 public abstract class GameCharacter {
-
     private int characterID;
     private String characterName;
     private int damage;
