@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Player {
     private int damage;
     private int health;
+    private int originalHealth;
     private int money;
     private String characterName;
     private String playerName;
@@ -57,6 +58,7 @@ public class Player {
     public void initPlayer(GameCharacter gameCharacter) {
         this.setDamage(gameCharacter.getDamage());
         this.setHealth(gameCharacter.getHealth());
+        this.setOriginalHealth(gameCharacter.getHealth());
         this.setMoney(gameCharacter.getMoney());
         this.setCharacterName(gameCharacter.getCharacterName());
     }
@@ -64,15 +66,19 @@ public class Player {
     public void printInfo() {
         System.out.println("Karakter: " + this.getCharacterName() +
                 "\t\tSilah: " + this.getInventory().getWeapon().getWeaponName() +
-                "\t\tHasar: " + this.getDamage() +
+                "\t\tHasar: " + this.getTotalDamage() +
                 "\t\tZırh: " + this.getInventory().getArmor().getArmorName() +
                 "\t\tBlok: " + this.getInventory().getArmor().getArmorBlock() +
                 "\t\tSağlık: " + this.getHealth() +
                 "\t\tPara: " + this.getMoney());
     }
 
-    public int getDamage() {
+    public int getTotalDamage() {
         return damage + this.getInventory().getWeapon().getWeaponDamage();
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void setDamage(int damage) {
@@ -84,6 +90,9 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        if (health < 0) {
+            health = 0;
+        }
         this.health = health;
     }
 
@@ -117,5 +126,13 @@ public class Player {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public int getOriginalHealth() {
+        return originalHealth;
+    }
+
+    public void setOriginalHealth(int originalHealth) {
+        this.originalHealth = originalHealth;
     }
 }
