@@ -14,6 +14,10 @@ public abstract class BattleLocation extends Location {
 
     @Override
     public boolean onLocation() {
+        if (getPlayer().getInventory().getAward().contains(getAward())) {
+            System.out.println("Buraya daha önce girdiniz ve ödülünüzü aldınız!");
+            return true;
+        }
         int obstacleNumber = this.randomObstacleNumber();
         System.out.println("Şu an buradasınız: " + this.getLocationName());
         System.out.println("Dikkali ol! Burada " + obstacleNumber + " tane " + this.getObstacle().getObstacleName() + " yaşamakta!");
@@ -73,6 +77,10 @@ public abstract class BattleLocation extends Location {
             } else {
                 return false;
             }
+        }
+        if (this.getPlayer().getHealth() > 0) {
+            getPlayer().getInventory().addAward(getAward());
+            System.out.println("Bölgeye Özel Ödül Kazandınız: " + getAward());
         }
         return false;
     }

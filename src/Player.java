@@ -16,10 +16,6 @@ public class Player {
     }
 
     public void selectCharacter() {
-        Samurai samurai = new Samurai();
-        Archer archer = new Archer();
-        Knight knight = new Knight();
-
         GameCharacter[] characterList = {new Samurai(), new Archer(), new Knight()};
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Karakterler");
@@ -49,10 +45,6 @@ public class Player {
             default:
                 initPlayer(new Samurai());
         }
-//        System.out.println("Karakter: " + this.getCharacterName() +
-//                "\t\tHasar: " + this.getDamage() +
-//                "\t\tSağlık: " + this.getHealth() +
-//                "\t\tPara: " + this.getMoney());
     }
 
     public void initPlayer(GameCharacter gameCharacter) {
