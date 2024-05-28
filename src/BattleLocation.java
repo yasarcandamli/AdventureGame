@@ -43,19 +43,34 @@ public abstract class BattleLocation extends Location {
     }
 
     public boolean combat(int obstacleNumber) {
+        Random random = new Random();
+
         for (int i = 1; i <= obstacleNumber; i++) {
+            int firstAttack = random.nextInt(2);
             this.getObstacle().setObstacleHealth(this.getObstacle().getOriginalObstacleHealth());
             playerStats();
             obstacleStats(i);
+
             while (this.getPlayer().getHealth() > 0 && this.getObstacle().getObstacleHealth() > 0) {
                 System.out.print("<V>ur veya <K>aç: ");
                 String selectCombat = input.nextLine().toUpperCase();
+
                 if (selectCombat.equals("V")) {
-                    System.out.println("Siz vurdunuz!");
-                    this.getObstacle().setObstacleHealth(this.getObstacle().getObstacleHealth() - this.getPlayer().getTotalDamage());
-                    afterHit();
-                    if (this.getObstacle().getObstacleHealth() > 0) {
-                        System.out.println();
+                    if (firstAttack == 0) {
+                        System.out.println("Siz vurdunuz!");
+                        this.getObstacle().setObstacleHealth(this.getObstacle().getObstacleHealth() - this.getPlayer().getTotalDamage());
+                        afterHit();
+                        if (this.getObstacle().getObstacleHealth() > 0) {
+                            System.out.println();
+                            System.out.println("Canavar size vurdu!");
+                            int obstacleDamage = this.getObstacle().getObstacleDamage() - this.getPlayer().getInventory().getArmor().getArmorBlock();
+                            if (obstacleDamage < 0) {
+                                obstacleDamage = 0;
+                            }
+                            this.getPlayer().setHealth(this.getPlayer().getHealth() - obstacleDamage);
+                            afterHit();
+                        }
+                    } else {
                         System.out.println("Canavar size vurdu!");
                         int obstacleDamage = this.getObstacle().getObstacleDamage() - this.getPlayer().getInventory().getArmor().getArmorBlock();
                         if (obstacleDamage < 0) {
@@ -63,7 +78,14 @@ public abstract class BattleLocation extends Location {
                         }
                         this.getPlayer().setHealth(this.getPlayer().getHealth() - obstacleDamage);
                         afterHit();
+                        if (this.getPlayer().getHealth() > 0) {
+                            System.out.println();
+                            System.out.println("Siz vurdunuz!");
+                            this.getObstacle().setObstacleHealth(this.getObstacle().getObstacleHealth() - this.getPlayer().getTotalDamage());
+                            afterHit();
+                        }
                     }
+
                 } else {
                     return false;
                 }
