@@ -63,6 +63,11 @@ public class Game {
                 System.out.println("GAME OVER!");
                 break;
             }
+
+            if (player.getInventory().getAward().size() == 3 && location.getLocationName().equals("Güvenli Ev")) {
+                System.out.println("Tebrikler, Oyunu Başarılı Bir Şekilde Tamamladınız");
+                break;
+            }
         }
     }
 }
