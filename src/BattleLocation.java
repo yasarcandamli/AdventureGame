@@ -85,7 +85,6 @@ public abstract class BattleLocation extends Location {
                             afterHit();
                         }
                     }
-
                 } else {
                     return false;
                 }
@@ -93,9 +92,13 @@ public abstract class BattleLocation extends Location {
 
             if (this.getObstacle().getObstacleHealth() < this.getPlayer().getHealth()) {
                 System.out.println("Düşmanı Yendiniz!");
-                System.out.println(this.getObstacle().getObstacleAward() + " para kazandınız!");
-                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getObstacleAward());
-                System.out.println("Güncel paranız: " + this.getPlayer().getMoney());
+                if (this.getObstacle().getObstacleName().equals("Yılan")) {
+                    System.out.println(randomAward());
+                } else {
+                    System.out.println(this.getObstacle().getObstacleAward() + " para kazandınız!");
+                    this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getObstacleAward());
+                    System.out.println("Güncel paranız: " + this.getPlayer().getMoney());
+                }
             } else {
                 return false;
             }
@@ -105,6 +108,58 @@ public abstract class BattleLocation extends Location {
             System.out.println("Bölgeye Özel Ödül Kazandınız: " + getAward());
         }
         return false;
+    }
+    private String randomAward() {
+        Random random = new Random();
+        int randomAward = random.nextInt(101);
+        if (randomAward <= 15) {
+            int randomWeapon = random.nextInt(101);
+            if (randomWeapon <= 20) {
+                Weapon earnedWeapon = Weapon.getWeaponObjectByID(1);
+                this.getPlayer().getInventory().setWeapon(earnedWeapon);
+                return this.getPlayer().getInventory().getWeapon().getWeaponName() + " kazandınız!";
+            } else if (randomWeapon <= 50) {
+                Weapon earnedWeapon = Weapon.getWeaponObjectByID(2);
+                this.getPlayer().getInventory().setWeapon(earnedWeapon);
+                return this.getPlayer().getInventory().getWeapon().getWeaponName() + " kazandınız!";
+            } else {
+                Weapon earnedWeapon = Weapon.getWeaponObjectByID(3);
+                this.getPlayer().getInventory().setWeapon(earnedWeapon);
+                return this.getPlayer().getInventory().getWeapon().getWeaponName() + " kazandınız!";
+            }
+        } else if (randomAward <= 30) {
+            int randomArmor = random.nextInt(101);
+            if (randomArmor <= 20) {
+                Armor earnedArmor = Armor.getArmorObjectByID(1);
+                this.getPlayer().getInventory().setArmor(earnedArmor);
+                return this.getPlayer().getInventory().getArmor().getArmorName() + " kazandınız!";
+            } else if (randomArmor <= 50) {
+                Armor earnedArmor = Armor.getArmorObjectByID(2);
+                this.getPlayer().getInventory().setArmor(earnedArmor);
+                return this.getPlayer().getInventory().getArmor().getArmorName() + " kazandınız!";
+            } else {
+                Armor earnedArmor = Armor.getArmorObjectByID(3);
+                this.getPlayer().getInventory().setArmor(earnedArmor);
+                return this.getPlayer().getInventory().getArmor().getArmorName() + " kazandınız!";
+            }
+        } else if (randomAward <= 70) {
+            int randomMoney = random.nextInt(101);
+            if (randomMoney <= 20) {
+                this.getObstacle().setObstacleAward(10);
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getObstacleAward());
+                return this.getObstacle().getObstacleAward() + " para kazandınız!";
+            } else if (randomMoney <= 50) {
+                this.getObstacle().setObstacleAward(5);
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getObstacleAward());
+                return this.getObstacle().getObstacleAward() + " para kazandınız!";
+            } else {
+                this.getObstacle().setObstacleAward(1);
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getObstacleAward());
+                return this.getObstacle().getObstacleAward() + " para kazandınız!";
+            }
+        } else {
+            return "Canavardan Ödül Düşmedi!";
+        }
     }
 
     public void afterHit() {
@@ -133,6 +188,7 @@ public abstract class BattleLocation extends Location {
         System.out.println("Ödül: " + this.getObstacle().getObstacleAward());
         System.out.println();
     }
+
 
     public Obstacle getObstacle() {
         return obstacle;

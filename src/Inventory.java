@@ -35,8 +35,7 @@ public class Inventory {
         this.award = award;
     }
 
-    public String addAward(String award) {
+    public void addAward(String award) {
         this.award.add(award);
-        return award;
     }
 }
